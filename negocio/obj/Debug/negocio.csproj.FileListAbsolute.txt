@@ -1,0 +1,9 @@
+C:\Users\lenovo\Desktop\TPFinalNivel2_Giunta\negocio\obj\Debug\negocio.csproj.AssemblyReference.cache
+C:\Users\lenovo\Desktop\TPFinalNivel2_Giunta\negocio\obj\Debug\negocio.csproj.CoreCompileInputs.cache
+C:\Users\lenovo\Desktop\TPFinalNivel2_Giunta\negocio\bin\Debug\negocio.dll
+C:\Users\lenovo\Desktop\TPFinalNivel2_Giunta\negocio\bin\Debug\negocio.pdb
+C:\Users\lenovo\Desktop\TPFinalNivel2_Giunta\negocio\bin\Debug\dominio.dll
+C:\Users\lenovo\Desktop\TPFinalNivel2_Giunta\negocio\bin\Debug\dominio.pdb
+C:\Users\lenovo\Desktop\TPFinalNivel2_Giunta\negocio\obj\Debug\negocio.csproj.CopyComplete
+C:\Users\lenovo\Desktop\TPFinalNivel2_Giunta\negocio\obj\Debug\negocio.dll
+C:\Users\lenovo\Desktop\TPFinalNivel2_Giunta\negocio\obj\Debug\negocio.pdb
