@@ -46,11 +46,5 @@
     <Compile Include="Marca.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ComercioWeb\ComercioWeb.csproj">
-      <Project>{7acb7cc4-c33d-48be-b8e7-560a5e8a4b72}</Project>
-      <Name>ComercioWeb</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

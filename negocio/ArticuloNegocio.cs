@@ -14,14 +14,14 @@ namespace negocio
     {
         public List<Articulo> listar()
         {
-            List<Articulo> lista = new List<Articulo> ();
+            List<Articulo> lista = new List<Articulo>();
             SqlConnection conexion = new SqlConnection();
             SqlCommand comando = new SqlCommand();
             SqlDataReader lector;
 
             try
             {
-                conexion.ConnectionString = "server=.\\SQLEXPRESS; database=CATALOGO_DB; integrated security=true";
+                conexion.ConnectionString = "server=.\\SQLEXPRESS; database=CATALOGO_WEB_DB; integrated security=true";
                 comando.CommandType = System.Data.CommandType.Text;
 
                 comando.CommandText = "Select Codigo, Nombre, A.Descripcion, ImagenUrl, Precio, M.Descripcion as Marca, C.Descripcion as Categoria, A.IdMarca, A.IdCategoria, A.Id From ARTICULOS A, CATEGORIAS C, MARCAS M Where M.Id = A.IdMarca And C.Id = A.IdCategoria";
@@ -36,7 +36,7 @@ namespace negocio
                     aux.Id = (int)lector["Id"];
                     aux.Codigo = (string)lector["Codigo"];
                     aux.Nombre = (string)lector["Nombre"];
-                    aux.Precio = Math.Round((decimal)lector["Precio"],2 );
+                    aux.Precio = Math.Round((decimal)lector["Precio"], 2);
                     aux.Descripcion = (string)lector["Descripcion"];
 
                     if (!(lector["ImagenUrl"] is DBNull))
@@ -47,7 +47,7 @@ namespace negocio
 
 
                     //Marca y Categoria
-                    aux.Marca = new Marca(); 
+                    aux.Marca = new Marca();
                     aux.Marca.Id = (int)lector["IdMarca"];
                     aux.Marca.Descripcion = (string)lector["Marca"];
 
@@ -67,17 +67,62 @@ namespace negocio
 
         }
 
+        public List<Articulo> listarConStored()
+        {
+            List<Articulo> lista = new List<Articulo>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearProcedimiento("listarArticulos");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Articulo aux = new Articulo();
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Codigo = (string)datos.Lector["Codigo"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Precio = Math.Round((decimal)datos.Lector["Precio"], 2);
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+
+                    if (!(datos.Lector["ImagenUrl"] is DBNull))
+                    {
+                        aux.ImagenUrl = (string)datos.Lector["ImagenUrl"];
+
+                    }
+
+
+                    //Marca y Categoria
+                    aux.Marca = new Marca();
+                    aux.Marca.Id = (int)datos.Lector["IdMarca"];
+                    aux.Marca.Descripcion = (string)datos.Lector["Marca"];
+
+                    aux.Categoria = new Categoria();
+                    aux.Categoria.Id = (int)datos.Lector["IdCategoria"];
+                    aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
+                    lista.Add(aux);
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex ;
+            }
+        }
+
         public void agregarArticulo(Articulo nuevoArticulo)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
 
-                datos.setearConsulta("Insert into ARTICULOS(Codigo, Nombre, Descripcion, Precio, IdMarca, IdCategoria, ImagenUrl)values('" + nuevoArticulo.Codigo + "','" + nuevoArticulo.Nombre + "','" + nuevoArticulo.Descripcion + "', "+ nuevoArticulo.Precio+" , @idMarca, @idCategoria, @imagenUrl)");
+                datos.setearConsulta("Insert into ARTICULOS(Codigo, Nombre, Descripcion, Precio, IdMarca, IdCategoria, ImagenUrl)values('" + nuevoArticulo.Codigo + "','" + nuevoArticulo.Nombre + "','" + nuevoArticulo.Descripcion + "', " + nuevoArticulo.Precio + " , @idMarca, @idCategoria, @imagenUrl)");
 
                 datos.setearParametro("@idMarca", nuevoArticulo.Marca.Id);
                 datos.setearParametro("@idCategoria", nuevoArticulo.Categoria.Id);
-                datos.setearParametro("@imagenUrl", nuevoArticulo.ImagenUrl);  
+                datos.setearParametro("@imagenUrl", nuevoArticulo.ImagenUrl);
 
                 datos.ejecutarAccion();
             }

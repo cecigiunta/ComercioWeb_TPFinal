@@ -4,3 +4,9 @@ C:\Users\lenovo\Desktop\TPFinalNivel2_Giunta\dominio\obj\Debug\dominio.csproj.As
 C:\Users\lenovo\Desktop\TPFinalNivel2_Giunta\dominio\obj\Debug\dominio.csproj.CoreCompileInputs.cache
 C:\Users\lenovo\Desktop\TPFinalNivel2_Giunta\dominio\obj\Debug\dominio.dll
 C:\Users\lenovo\Desktop\TPFinalNivel2_Giunta\dominio\obj\Debug\dominio.pdb
+C:\Users\lenovo\Desktop\ComercioWeb-FinalTP\dominio\bin\Debug\dominio.dll
+C:\Users\lenovo\Desktop\ComercioWeb-FinalTP\dominio\bin\Debug\dominio.pdb
+C:\Users\lenovo\Desktop\ComercioWeb-FinalTP\dominio\obj\Debug\dominio.csproj.AssemblyReference.cache
+C:\Users\lenovo\Desktop\ComercioWeb-FinalTP\dominio\obj\Debug\dominio.csproj.CoreCompileInputs.cache
+C:\Users\lenovo\Desktop\ComercioWeb-FinalTP\dominio\obj\Debug\dominio.dll
+C:\Users\lenovo\Desktop\ComercioWeb-FinalTP\dominio\obj\Debug\dominio.pdb

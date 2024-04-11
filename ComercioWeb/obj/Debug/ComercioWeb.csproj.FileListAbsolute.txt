@@ -57,3 +57,7 @@ C:\Users\lenovo\Desktop\ComercioWeb-FinalTP\ComercioWeb\obj\Debug\ComercioWeb.cs
 C:\Users\lenovo\Desktop\ComercioWeb-FinalTP\ComercioWeb\obj\Debug\ComercioWeb.csproj.CopyComplete
 C:\Users\lenovo\Desktop\ComercioWeb-FinalTP\ComercioWeb\obj\Debug\ComercioWeb.dll
 C:\Users\lenovo\Desktop\ComercioWeb-FinalTP\ComercioWeb\obj\Debug\ComercioWeb.pdb
+C:\Users\lenovo\Desktop\ComercioWeb-FinalTP\ComercioWeb\bin\dominio.dll
+C:\Users\lenovo\Desktop\ComercioWeb-FinalTP\ComercioWeb\bin\negocio.dll
+C:\Users\lenovo\Desktop\ComercioWeb-FinalTP\ComercioWeb\bin\dominio.pdb
+C:\Users\lenovo\Desktop\ComercioWeb-FinalTP\ComercioWeb\bin\negocio.pdb
