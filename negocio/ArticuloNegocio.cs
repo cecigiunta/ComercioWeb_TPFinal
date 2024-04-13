@@ -266,18 +266,33 @@ namespace negocio
                             break;
                     }
                 }
-                else
+                else if(campo ==  "Marca")
                 {
                     switch (criterio)
                     {
                         case "Comienza con":
-                            consulta += "Codigo like '" + filtro + "%'";
+                            consulta += "M.Descripcion like '" + filtro + "%'";
                             break;
                         case "Termina con":
-                            consulta += "Codigo like '%" + filtro + "'";
+                            consulta += "M.Descripcion like '%" + filtro + "'";
                             break;
                         default:
-                            consulta += "Codigo like '%" + filtro + "%'";
+                            consulta += "M.Descripcion like '%" + filtro + "%'";
+                            break;
+                    }
+                }
+                else 
+                {
+                    switch (criterio)
+                    {
+                        case "Comienza con":
+                            consulta += "C.Descripcion like '" + filtro + "%'";
+                            break;
+                        case "Termina con":
+                            consulta += "C.Descripcion like '%" + filtro + "'";
+                            break;
+                        default:
+                            consulta += "C.Descripcion like '%" + filtro + "%'";
                             break;
                     }
                 }

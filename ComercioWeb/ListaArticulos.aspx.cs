@@ -11,10 +11,15 @@ namespace ComercioWeb
 {
     public partial class ListaArticulos : System.Web.UI.Page
     {
+        public bool filtroAvanzado { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            filtroAvanzado = chkAvanzado.Checked;
+
             if (!IsPostBack)
             {
+                filtroAvanzado = false;
                 ArticuloNegocio negocio = new ArticuloNegocio();
                 Session.Add("listaArticulos", negocio.listarConStored());
 
@@ -25,7 +30,7 @@ namespace ComercioWeb
 
         protected void dgvArticulos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string id = dgvArticulos.SelectedDataKey.Value.ToString();  
+            string id = dgvArticulos.SelectedDataKey.Value.ToString();
             Response.Redirect("AgregarArticulo.aspx?id=" + id);
         }
 
@@ -36,6 +41,49 @@ namespace ComercioWeb
 
             dgvArticulos.DataSource = listaFiltrada;
             dgvArticulos.DataBind();
+        }
+
+        protected void chkAvanzado_CheckedChanged(object sender, EventArgs e)
+        {
+            filtroAvanzado = chkAvanzado.Checked;
+            txtFiltroRapido.Enabled = !filtroAvanzado;
+        }
+
+        protected void ddlCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ddlCriterio.Items.Clear();
+            if (ddlCampo.SelectedItem.ToString() == "Precio")
+            {
+                ddlCriterio.Items.Add("Igual a");
+                ddlCriterio.Items.Add("Mayor a");
+                ddlCriterio.Items.Add("Menor a");
+            }
+            else
+            {
+                ddlCriterio.Items.Add("Contiene");
+                ddlCriterio.Items.Add("Comienza con");
+                ddlCriterio.Items.Add("Termina con");
+            }
+
+        }
+
+        protected void btnBuscarFiltroAv_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ArticuloNegocio negocio = new ArticuloNegocio();
+                dgvArticulos.DataSource = negocio.filtrarConDB(
+                                                ddlCampo.SelectedItem.ToString(),
+                                                ddlCriterio.SelectedItem.ToString(),
+                                                txtFiltroAvanzado.Text);
+                dgvArticulos.DataBind();
+
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
+            }
         }
     }
 }
