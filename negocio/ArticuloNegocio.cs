@@ -12,7 +12,7 @@ namespace negocio
 {
     public class ArticuloNegocio
     {
-        public List<Articulo> listar()
+        public List<Articulo> listar(string id = "")
         {
             List<Articulo> lista = new List<Articulo>();
             SqlConnection conexion = new SqlConnection();
@@ -24,7 +24,15 @@ namespace negocio
                 conexion.ConnectionString = "server=.\\SQLEXPRESS; database=CATALOGO_WEB_DB; integrated security=true";
                 comando.CommandType = System.Data.CommandType.Text;
 
-                comando.CommandText = "Select Codigo, Nombre, A.Descripcion, ImagenUrl, Precio, M.Descripcion as Marca, C.Descripcion as Categoria, A.IdMarca, A.IdCategoria, A.Id From ARTICULOS A, CATEGORIAS C, MARCAS M Where M.Id = A.IdMarca And C.Id = A.IdCategoria";
+                comando.CommandText = "Select Codigo, Nombre, A.Descripcion, ImagenUrl, Precio, M.Descripcion as Marca, C.Descripcion as Categoria, A.IdMarca, A.IdCategoria, A.Id From ARTICULOS A, CATEGORIAS C, MARCAS M Where M.Id = A.IdMarca And C.Id = A.IdCategoria ";
+                
+                if(id != "")
+                {
+                    comando.CommandText += "and A.Id = " + id;
+                }
+
+
+
                 comando.Connection = conexion;
                 conexion.Open();
 
@@ -190,6 +198,21 @@ namespace negocio
                 datos.cerrarConexion();
             }
 
+        }
+
+        public void modificarConStored(Articulo articuloModificar)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearProcedimiento("storedModificarArticulo");
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public List<Articulo> filtrarConDB(string campo, string criterio, string filtro)

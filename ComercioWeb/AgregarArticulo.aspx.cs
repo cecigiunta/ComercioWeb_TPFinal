@@ -56,6 +56,7 @@ namespace ComercioWeb
                 nuevoArticulo.Codigo = txtCodigo.Text;
                 nuevoArticulo.Descripcion = txtDescripcion.Text;
                 nuevoArticulo.ImagenUrl = txtImagenUrl.Text;
+                nuevoArticulo.Precio = decimal.Parse(txtPrecio.Text);
 
                 //para marca y categoria
                 nuevoArticulo.Marca = new Marca();
