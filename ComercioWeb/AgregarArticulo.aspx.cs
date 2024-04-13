@@ -50,6 +50,22 @@ namespace ComercioWeb
             try
             {
                 Articulo nuevoArticulo = new Articulo();
+                ArticuloNegocio negocio = new ArticuloNegocio();
+
+                nuevoArticulo.Nombre = txtNombre.Text;
+                nuevoArticulo.Codigo = txtCodigo.Text;
+                nuevoArticulo.Descripcion = txtDescripcion.Text;
+                nuevoArticulo.ImagenUrl = txtImagenUrl.Text;
+
+                //para marca y categoria
+                nuevoArticulo.Marca = new Marca();
+                nuevoArticulo.Marca.Id = int.Parse(ddlMarca.SelectedValue);
+
+                nuevoArticulo.Categoria = new Categoria();
+                nuevoArticulo.Categoria.Id = int.Parse(ddlCategoria.SelectedValue);
+
+                negocio.agregarConStored(nuevoArticulo);
+                Response.Redirect("ListaArticulos.aspx", false);
             }
             catch (Exception ex)
             {

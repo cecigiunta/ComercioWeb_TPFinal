@@ -16,6 +16,10 @@
                 <label for="txtNombre" class="form-label">Nombre</label>
                 <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" />
             </div>
+               <div class="mb-3">
+                <label for="txtCodigo" class="form-label">Código</label>
+                <asp:TextBox ID="txtCodigo" runat="server" CssClass="form-control" />
+            </div>
             <div class="mb-3">
                 <label for="txtDescripcion" class="form-label">Descripcion</label>
                 <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control" />

@@ -137,6 +137,32 @@ namespace negocio
             }
         }
 
+        public void agregarConStored(Articulo nuevoArticulo)
+        {
+            AccesoDatos datos =new AccesoDatos();
+            try
+            {
+                datos.setearProcedimiento("storedNuevoArticulo");
+                datos.setearParametro("@codigo", nuevoArticulo.Codigo);
+                datos.setearParametro("@nombre", nuevoArticulo.Nombre);
+                datos.setearParametro("@descripcion", nuevoArticulo.Descripcion);
+                datos.setearParametro("@idMarca", nuevoArticulo.Marca.Id);
+                datos.setearParametro("@idCategoria", nuevoArticulo.Categoria.Id);
+                datos.setearParametro("@img", nuevoArticulo.ImagenUrl);
+                datos.setearParametro("@precio", nuevoArticulo.Precio);
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
         public void modificarArticulo(Articulo articuloModificar)
         {
             AccesoDatos datos = new AccesoDatos();
