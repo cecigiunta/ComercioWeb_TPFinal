@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using dominio;
 using negocio;
 
 namespace ComercioWeb
@@ -15,7 +16,9 @@ namespace ComercioWeb
             if (!IsPostBack)
             {
                 ArticuloNegocio negocio = new ArticuloNegocio();
-                dgvArticulos.DataSource = negocio.listarConStored();
+                Session.Add("listaArticulos", negocio.listarConStored());
+
+                dgvArticulos.DataSource = Session["listaArticulos"];
                 dgvArticulos.DataBind();
             }
         }
@@ -24,6 +27,15 @@ namespace ComercioWeb
         {
             string id = dgvArticulos.SelectedDataKey.Value.ToString();  
             Response.Redirect("AgregarArticulo.aspx?id=" + id);
+        }
+
+        protected void txtFiltroRapido_TextChanged(object sender, EventArgs e)
+        {
+            List<Articulo> lista = (List<Articulo>)Session["listaArticulos"];
+            List<Articulo> listaFiltrada = lista.FindAll(x => x.Nombre.ToLower().Contains(txtFiltroRapido.Text.ToLower()));
+
+            dgvArticulos.DataSource = listaFiltrada;
+            dgvArticulos.DataBind();
         }
     }
 }
