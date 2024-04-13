@@ -25,8 +25,8 @@ namespace negocio
                 comando.CommandType = System.Data.CommandType.Text;
 
                 comando.CommandText = "Select Codigo, Nombre, A.Descripcion, ImagenUrl, Precio, M.Descripcion as Marca, C.Descripcion as Categoria, A.IdMarca, A.IdCategoria, A.Id From ARTICULOS A, CATEGORIAS C, MARCAS M Where M.Id = A.IdMarca And C.Id = A.IdCategoria ";
-                
-                if(id != "")
+
+                if (id != "")
                 {
                     comando.CommandText += "and A.Id = " + id;
                 }
@@ -116,7 +116,7 @@ namespace negocio
             catch (Exception ex)
             {
 
-                throw ex ;
+                throw ex;
             }
         }
 
@@ -147,7 +147,7 @@ namespace negocio
 
         public void agregarConStored(Articulo nuevoArticulo)
         {
-            AccesoDatos datos =new AccesoDatos();
+            AccesoDatos datos = new AccesoDatos();
             try
             {
                 datos.setearProcedimiento("storedNuevoArticulo");
@@ -206,12 +206,25 @@ namespace negocio
             try
             {
                 datos.setearProcedimiento("storedModificarArticulo");
+                datos.setearParametro("@codigo", articuloModificar.Codigo);
+                datos.setearParametro("@nombre", articuloModificar.Nombre);
+                datos.setearParametro("@descripcion", articuloModificar.Descripcion);
+                datos.setearParametro("@idMarca", articuloModificar.Marca.Id);
+                datos.setearParametro("@idCategoria", articuloModificar.Categoria.Id);
+                datos.setearParametro("@img", articuloModificar.ImagenUrl);
+                datos.setearParametro("@precio", articuloModificar.Precio);
+                datos.setearParametro("@id", articuloModificar.Id);
 
+                datos.ejecutarAccion();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
             }
         }
 

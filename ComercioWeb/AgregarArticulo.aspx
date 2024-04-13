@@ -51,10 +51,7 @@
                     <ContentTemplate>
                         <div class="mb-3">
                             <asp:Label ID="txtImagenUrl" runat="server" Text="Imagen"></asp:Label>
-                            <asp:TextBox ID="txtUrlImagenUrl" runat="server" AutoPostBack="true"
-                                OnTextChanged="txtUrlImagenUrl_TextChanged" CssClass="form-control">
-
-                            </asp:TextBox>
+                            <asp:TextBox ID="txtUrlImagenUrl" runat="server" AutoPostBack="true" OnTextChanged="txtUrlImagenUrl_TextChanged" CssClass="form-control">     </asp:TextBox>
                         </div>
 
                         <asp:Image ImageUrl="https://st3.depositphotos.com/6723736/12729/v/950/depositphotos_127297230-stock-illustration-download-sign-load-icon-load.jpg" ID="imgArticulo" runat="server" Width="60%" />

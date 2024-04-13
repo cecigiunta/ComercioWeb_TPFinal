@@ -27,8 +27,6 @@ namespace ComercioWeb
                     ddlCategoria.DataTextField = "Descripcion";
                     ddlCategoria.DataBind();
 
-
-
                     MarcaNegocio marcaNegocio = new MarcaNegocio();
                     List<Marca> marca = marcaNegocio.listar();
 
@@ -36,6 +34,25 @@ namespace ComercioWeb
                     ddlMarca.DataValueField = "Id";
                     ddlMarca.DataTextField = "Descripcion";
                     ddlMarca.DataBind();
+
+                    // MODIFICAR UN ARTÍCULO
+                    if (Request.QueryString["id"] != null && !IsPostBack)  //si viene el querystring con un id..
+                    {
+                        ArticuloNegocio negocio = new ArticuloNegocio();
+                        List<Articulo> lista = negocio.listar(Request.QueryString["id"].ToString());
+                        Articulo seleccionado = lista[0];
+
+                        // Pre carga de los datos en el Form:
+                        txtId.Text = Request.QueryString["id"];
+                        txtNombre.Text = seleccionado.Nombre;
+                        txtCodigo.Text = seleccionado.Codigo;
+                        txtDescripcion.Text = seleccionado.Descripcion;
+                        txtPrecio.Text = seleccionado.Precio.ToString();
+                        ddlMarca.SelectedValue = seleccionado.Marca.Id.ToString();
+                        ddlCategoria.SelectedValue = seleccionado.Categoria.Id.ToString();
+                        txtUrlImagenUrl_TextChanged(sender, e);
+                        txtUrlImagenUrl.Text = seleccionado.ImagenUrl;
+                    }
                 }
             }
             catch (Exception ex)
@@ -65,7 +82,15 @@ namespace ComercioWeb
                 nuevoArticulo.Categoria = new Categoria();
                 nuevoArticulo.Categoria.Id = int.Parse(ddlCategoria.SelectedValue);
 
-                negocio.agregarConStored(nuevoArticulo);
+                if (Request.QueryString["id"] != null)
+                {
+                    nuevoArticulo.Id = int.Parse(txtId.Text);
+                    negocio.modificarConStored(nuevoArticulo);
+                }
+                else
+                {
+                    negocio.agregarConStored(nuevoArticulo);
+                }
                 Response.Redirect("ListaArticulos.aspx", false);
             }
             catch (Exception ex)
@@ -82,7 +107,7 @@ namespace ComercioWeb
 
         protected void txtUrlImagenUrl_TextChanged(object sender, EventArgs e)
         {
-
+            imgArticulo.ImageUrl = txtUrlImagenUrl.Text;
         }
     }
 }

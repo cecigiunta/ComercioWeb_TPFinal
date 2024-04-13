@@ -13,10 +13,13 @@
 
 
 
-    <asp:GridView ID="dgvArticulos" CssClass="table" AutoGenerateColumns="false" runat="server">
+    <asp:GridView ID="dgvArticulos" CssClass="table" 
+        OnSelectedIndexChanged="dgvArticulos_SelectedIndexChanged" DataKeyNames="Id"
+        AutoGenerateColumns="false" runat="server">
 
         <Columns>
             <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
+            <asp:BoundField HeaderText="Codigo" DataField="Codigo" />
             <asp:BoundField HeaderText="Descripción" DataField="Descripcion" />
             <asp:BoundField HeaderText="Precio" DataField="Precio" />
             <asp:BoundField HeaderText="Marca" DataField="Marca" />
