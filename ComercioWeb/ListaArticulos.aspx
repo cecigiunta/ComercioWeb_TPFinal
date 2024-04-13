@@ -17,7 +17,12 @@
 
         <Columns>
             <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
+            <asp:BoundField HeaderText="Descripción" DataField="Descripcion" />
+            <asp:BoundField HeaderText="Precio" DataField="Precio" />
+            <asp:BoundField HeaderText="Marca" DataField="Marca" />
+            <asp:BoundField HeaderText="Categoría" DataField="Categoria" />
 
+            <asp:CommandField HeaderText="Acción" ShowSelectButton="true" SelectText="Ver Detalle" />
             <asp:CommandField HeaderText="Acción" ShowSelectButton="true" SelectText="EDITAR" />
 
         </Columns>
@@ -26,7 +31,5 @@
 
     </asp:GridView>
 
-    <asp:Button ID="btnAgregarProducto" CssClass="btn btn-primary" runat="server" Text="Agregar Producto" />
-
-
+    <a href="AgregarArticulo.aspx" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">Agregar Articulo</a>
 </asp:Content>
