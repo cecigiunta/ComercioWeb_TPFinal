@@ -11,9 +11,11 @@ namespace ComercioWeb
 {
     public partial class AgregarArticulo : System.Web.UI.Page
     {
+        public bool confirmaEliminacion { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             txtId.Enabled = false;
+            confirmaEliminacion = false;
 
             try
             {
@@ -108,6 +110,33 @@ namespace ComercioWeb
         protected void txtUrlImagenUrl_TextChanged(object sender, EventArgs e)
         {
             imgArticulo.ImageUrl = txtUrlImagenUrl.Text;
+        }
+
+        protected void btnEliminarArticulo_Click(object sender, EventArgs e)
+        {
+            confirmaEliminacion = true;
+        }
+
+        protected void btnConfirmaEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (chkConfirmaEliminacion.Checked)
+                {
+                    ArticuloNegocio negocio = new ArticuloNegocio();
+                    negocio.eliminarArticulo(int.Parse(txtId.Text));
+                    Response.Redirect("ListaArticulos.aspx");
+                }
+            }
+            catch(System.Threading.ThreadAbortException ex)
+            {
+
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
+            }
         }
     }
 }
