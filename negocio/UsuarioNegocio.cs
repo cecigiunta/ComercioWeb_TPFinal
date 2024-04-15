@@ -33,5 +33,36 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
+
+        public bool Login(Usuario usuario)
+        {
+            AccesoDatos datos =new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("Select Id, email, pass, admin FROM USERS Where email = @email And pass = @pass");
+                datos.setearParametro("@email", usuario.Email);
+                datos.setearParametro("@pass", usuario.Pass);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    usuario.Id = (int)datos.Lector["id"];
+                    usuario.Admin = (bool)datos.Lector["admin"];
+                    return true;
+
+                }
+                return false; //no hay user logueado
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

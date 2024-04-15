@@ -15,6 +15,15 @@ namespace ComercioWeb
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //validacion ADMIN
+            if (!Seguridad.esAdmin(Session["usuario"]))
+            {
+                Session.Add("error", "Se requiere permisos de Administrador para poder acceder");
+
+                Response.Redirect("Error.aspx", false);
+            }
+
+
             filtroAvanzado = chkAvanzado.Checked;
 
             if (!IsPostBack)

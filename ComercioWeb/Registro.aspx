@@ -24,7 +24,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Imagen</label>
-            <asp:TextBox ID="txtImagenPerfil" runat="server" placeholder="ejemplo@gmail.com" CssClass="form-control"></asp:TextBox>
+            <asp:TextBox ID="txtImagenPerfil" runat="server" CssClass="form-control"></asp:TextBox>
         </div>
         <asp:Button ID="btnRegistrar" runat="server" Text="Registrarse" OnClick="btnRegistrar_Click" CssClass="btn btn-primary" />
         <a href="/">Cancelar</a>

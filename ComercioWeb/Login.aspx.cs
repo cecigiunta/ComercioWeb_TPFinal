@@ -1,4 +1,6 @@
-﻿using System;
+﻿using dominio;
+using negocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,7 +18,30 @@ namespace ComercioWeb
 
         protected void btnIngresar_Click(object sender, EventArgs e)
         {
+            Usuario usuario = new Usuario();
+            UsuarioNegocio negocio = new UsuarioNegocio();
 
+            try
+            {
+                usuario.Email = txtEmailLogin.Text;
+                usuario.Pass = txtPasswordLogin.Text;
+
+                if (negocio.Login(usuario))
+                {
+                    Session.Add("usuario", usuario);
+                    Response.Redirect("ListaArticulos.aspx", false);
+                }
+                else
+                {
+                    Session.Add("error", "ERROR! Usuario o contraseña incorrectos");
+                    Response.Redirect("Error.aspx", false);
+                }
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
+            }
         }
     }
 }
