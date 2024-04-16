@@ -26,11 +26,36 @@
                         <div class="navbar-nav">
                             <a class="nav-link active" aria-current="page" href="Default.aspx">Home</a>
                             <a class="nav-link" href="ListaArticulos.aspx">Artículos</a>
-                            <a class="nav-link" href="Login.aspx">Login</a>
-                            <a class="nav-link" href="Registro.aspx">Registro</a>
+                            <a class="nav-link" href="MiPerfil.aspx">Mi Perfil</a>
+
+
+                            <div class="d-flex flex-end">
+                                <%--si NO hay una sesion activa (si no hay user logueado)--%>
+                                <% if (!negocio.Seguridad.sessionActiva(Session["usuario"]))
+
+                                    {  %>
+
+                                <a class="btn btn-success" href="Registro.aspx">Registro</a>
+
+
+                                <a class="btn btn-primary" href="Login.aspx">Login</a>
+
+
+                                <% }
+                                    else
+                                    { %>
+
+                                <asp:Button ID="btnSalir" CssClass="btn btn-danger" OnClick="btnSalir_Click" runat="server" Text="Salir" />
+                                <%  } %>
+
+                                <asp:Label ID="lblUser" runat="server" Text=""></asp:Label>
+
+                                <asp:Image ID="imgAvatar" Style="height: 40px; width: 40px; border-radius: 50%;" runat="server" />
+
+
+                            </div>
                         </div>
                     </div>
-                </div>
             </nav>
 
 

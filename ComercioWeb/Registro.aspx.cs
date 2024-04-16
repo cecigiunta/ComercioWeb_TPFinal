@@ -30,11 +30,14 @@ namespace ComercioWeb
                 user.ImagenPerfil = txtImagenPerfil.Text;
 
                 int id = negocio.insertarUserNuevo(user);
+                Session.Add("usuario", user);
+                Response.Redirect("ListaArticulos.aspx", false);
             }
             catch (Exception ex)
             {
                 Session.Add("error", ex.ToString());
                 Response.Redirect("Error.aspx", false);
+                
             }
         }
     }
